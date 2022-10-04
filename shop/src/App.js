@@ -1,9 +1,9 @@
 import './App.css';
-import { Navbar, Container, Nav } from 'react-bootstrap';
+import { Navbar, Container, Nav, NavLink } from 'react-bootstrap';
 import { useState } from 'react';
 //image - import 작명 from './파일경로';
 import datas from './data.js';
-import {Pages, About, Event} from './Routes/Pages.js';
+import {Products, About, Event} from './Routes/Pages.js';
 import { Routes, Route, Link, useNavigate, Outlet } from "react-router-dom";
 // useNavigate() : page 이동 도와주는 함수
 
@@ -35,19 +35,17 @@ function App() {
           <Products_div iPhone = {iPhone}/>
         </>}/>
 
-        <Route path="/products" element={
-        <>
-        <div>
-          <Pages/>
-        </div>
-        </>}/>
+        <Route path="/products/:id" element={
+        
+          <Products iPhone={iPhone}/>
+        }/>
         <Route path="/cart" element={<div>아직 구현중입니다.</div>}/> 
         <Route path="/about" element={<About/>}>
           <Route path='members' element = {
             <div>
               <div className="container">
                 <div className="row">
-                    <div className='col-md-6'> 
+                    <div className='col-md-6'>                       
                         <img src= {process.env.PUBLIC_URL + "/image_src/profile1.jpeg"} width= "80%"/>
                     </div>
                     <div className="col-md-6">
@@ -91,7 +89,11 @@ function Products_div(props){
           {props.iPhone.map(function (a, i){
             return(
               <div className='col-md-4'> 
-                <img src= {process.env.PUBLIC_URL + "/image_src/iPhone" + (i+1) +".png"} width= "50%" height = "70%"/>
+                <Link to = {"/products/" + i}>
+
+                  <img src= {process.env.PUBLIC_URL + "/image_src/iPhone" + (i+1) +".png"} width= "50%" height = "70%" />
+
+                </Link>
                 <h4>{props.iPhone[i].title}</h4>
                 <p>{props.iPhone[i].content}</p>
                 <p>{props.iPhone[i].price}</p>

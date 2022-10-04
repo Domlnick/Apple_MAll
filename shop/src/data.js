@@ -12,7 +12,7 @@ let datas = [
         price : "$799"
     },
     {
-        id : 0,
+        id : 2,
         title : 'iPhone13',
         content : "As amazing as ever",
         price : "$599"
