@@ -102,20 +102,8 @@ function Products_div(props){
           })
           }
           <button className="btn btn-danger" onClick={() => {
-            axios.get('https://codingapple1.github.io/shop/data2.json')
+            axios.get('https://github.com/Domlnick/Apple_MAll/blob/main/shop/data2.json')
             .then((data) => {
-              console.log(typeof(data.data))
-              data.data[0].title = "iPad Pro"
-              data.data[0].content = "The ultimate iPad Experience"
-              data.data[0].price = "$799"
-
-              data.data[1].title = "iPad Air"
-              data.data[1].content = "Powerful. Colorful. Wonderful"
-              data.data[1].price = "$599"
-
-              data.data[2].title = "iPad Pro"
-              data.data[2].content = "Delightfully capable. Surprisingly affordable"
-              data.data[2].price = "$329"
               console.log(data.data)
 
               let copy = [...props.iPhone, ...data.data];
