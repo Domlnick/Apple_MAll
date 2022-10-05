@@ -1,6 +1,6 @@
 import './App.css';
 import { Navbar, Container, Nav, NavLink } from 'react-bootstrap';
-import { useState } from 'react';
+import { createContext, useState } from 'react';
 //image - import 작명 from './파일경로';
 import datas from './data.js';
 import {Products, About, Event} from './Routes/Pages.js';
@@ -8,13 +8,14 @@ import { Routes, Route, Link, useNavigate, Outlet } from "react-router-dom";
 // useNavigate() : page 이동 도와주는 함수
 import axios from 'axios';
 import { type } from '@testing-library/user-event/dist/type';
+import Cart from './Routes/Cart';
+
 
 function App() {
 
-  let [iPhone, setIPhone] = useState(datas);
+  let [iPhone] = useState(datas);
 
-  let navigate = useNavigate();
-
+  let navigate = useNavigate()
   return (
     <div className="App">
       
@@ -23,7 +24,7 @@ function App() {
           <Navbar.Brand href="/">Apple Mall</Navbar.Brand>
           <Nav className="me-auto">
             <Nav.Link href="/">Home</Nav.Link>
-            <Nav.Link href="/products">Products</Nav.Link>
+            {/* <Nav.Link href="/products">Products</Nav.Link> */}
             <Nav.Link href="/cart" onClick={() => { navigate('/cart')}}>Cart</Nav.Link>
             <Nav.Link href="/about">About Us</Nav.Link>
           </Nav>
@@ -34,14 +35,13 @@ function App() {
         <Route path="/" element={
         <>
           <div className='main-bg'></div>
-          <Products_div iPhone = {iPhone} setIPhone = {setIPhone}/>
+            <Products_div iPhone = {iPhone}/>
         </>}/>
 
         <Route path="/products/:id" element={
-        
-          <Products iPhone={iPhone}/>
+            <Products iPhone={iPhone}/>
         }/>
-        <Route path="/cart" element={<div>아직 구현중입니다.</div>}/> 
+        <Route path="/cart" element={ <Cart/> }/> 
         <Route path="/about" element={<About/>}>
           <Route path='members' element = {
             <div>
@@ -84,6 +84,7 @@ function App() {
 }
 
 function Products_div(props){
+  let [cnt, setCnt] = useState(0);
 
   return(
     <div className='container'>
@@ -102,18 +103,32 @@ function Products_div(props){
           })
           }
           <button className="btn btn-danger" onClick={() => {
-            axios.get('https://github.com/Domlnick/Apple_MAll/blob/main/shop/data2.json')
+            
+            if (cnt == 0){
+            axios.get('https://raw.githubusercontent.com/Domlnick/Apple_MAll/main/shop/data2.json')
             .then((data) => {
-              console.log(data.data)
-
-              let copy = [...props.iPhone, ...data.data];
-              props.setIPhone(copy);
-
+              
+              let copy = [...props.iPhone, ...data.data]
+              props.setIPhone(copy)
+              setCnt(cnt + 1)
             })
             .catch(() => {
               alert('요청한 url이 존재하지 않거나 해당 url에 데이터가 없습니다.')
             })
-          }}>다른 제품 보기</button>
+          }else if(cnt == 1){
+            axios.get('https://raw.githubusercontent.com/Domlnick/Apple_MAll/main/shop/data3.json')
+            .then((data) => {
+              
+              let copy = [...props.iPhone, ...data.data]
+              props.setIPhone(copy)
+              setCnt(cnt + 1)
+            })
+            .catch(() => {
+              alert('요청한 url이 존재하지 않거나 해당 url에 데이터가 없습니다.')
+            })
+          }else{
+            alert('더이상 제품이 없습니다')
+          }}}>다른 제품 보기</button>
       </div>
     </div>
   );

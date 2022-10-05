@@ -13,6 +13,23 @@
   }
 }
 
+.startTab {
+  transform: scale(0);
+}
+.endTab {
+  transform: scale(1);
+  transition: transform 0.5s;
+}
+
+.startPage {
+  opacity: 0;
+}
+
+.endPage {
+  opacity: 1;
+  transition : opacity 0.5s;
+}
+
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
