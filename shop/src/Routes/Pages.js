@@ -38,14 +38,15 @@ function Products(props) {
                 <div className="row">
                     <div className='col-md-6'> 
                     
-                    <img src= {process.env.PUBLIC_URL + '/image_src/iPhone' + (Number(id) + 1)+ '.png'} width= "100%" />
+                    <img src= {process.env.PUBLIC_URL + '/image_src/apple' + (Number(id) + 1)+ '.png'} width= "100%" />
                         
                     </div>
-                    <input onChange={(e) => {setNum(e.target.value)}}></input>
+                    
                     <div className="col-md-6">
                         <h4 className="pt-5">{products.title}</h4>
                         <p>{products.content}</p>
                         <p>{products.price}</p>
+                        수량 : <input onChange={(e) => {setNum(e.target.value)}}/>
                         <button className="btn btn-danger">상품 주문</button>
                     </div>
                 </div>

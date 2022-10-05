@@ -6,10 +6,12 @@ import datas from './data.js';
 import {Products, About, Event} from './Routes/Pages.js';
 import { Routes, Route, Link, useNavigate, Outlet } from "react-router-dom";
 // useNavigate() : page 이동 도와주는 함수
+import axios from 'axios';
+import { type } from '@testing-library/user-event/dist/type';
 
 function App() {
 
-  let [iPhone] = useState(datas);
+  let [iPhone, setIPhone] = useState(datas);
 
   let navigate = useNavigate();
 
@@ -32,7 +34,7 @@ function App() {
         <Route path="/" element={
         <>
           <div className='main-bg'></div>
-          <Products_div iPhone = {iPhone}/>
+          <Products_div iPhone = {iPhone} setIPhone = {setIPhone}/>
         </>}/>
 
         <Route path="/products/:id" element={
@@ -90,9 +92,7 @@ function Products_div(props){
             return(
               <div className='col-md-4'> 
                 <Link to = {"/products/" + i}>
-
-                  <img src= {process.env.PUBLIC_URL + "/image_src/iPhone" + (i+1) +".png"} width= "50%" height = "70%" />
-
+                  <img src= {process.env.PUBLIC_URL + "/image_src/apple" + (i+1) +".png"} width= "50%" height = "70%" />
                 </Link>
                 <h4>{props.iPhone[i].title}</h4>
                 <p>{props.iPhone[i].content}</p>
@@ -101,6 +101,31 @@ function Products_div(props){
             )
           })
           }
+          <button className="btn btn-danger" onClick={() => {
+            axios.get('https://codingapple1.github.io/shop/data2.json')
+            .then((data) => {
+              console.log(typeof(data.data))
+              data.data[0].title = "iPad Pro"
+              data.data[0].content = "The ultimate iPad Experience"
+              data.data[0].price = "$799"
+
+              data.data[1].title = "iPad Air"
+              data.data[1].content = "Powerful. Colorful. Wonderful"
+              data.data[1].price = "$599"
+
+              data.data[2].title = "iPad Pro"
+              data.data[2].content = "Delightfully capable. Surprisingly affordable"
+              data.data[2].price = "$329"
+              console.log(data.data)
+
+              let copy = [...props.iPhone, ...data.data];
+              props.setIPhone(copy);
+
+            })
+            .catch(() => {
+              alert('요청한 url이 존재하지 않거나 해당 url에 데이터가 없습니다.')
+            })
+          }}>다른 제품 보기</button>
       </div>
     </div>
   );

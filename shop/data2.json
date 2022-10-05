@@ -1,0 +1,38 @@
+[
+  {
+    "id": 3,
+    "title": "iPad Pro",
+    "content": "The ultimate iPad Experience",
+    "price": "$799"
+  },
+  {
+    "id": 4,
+    "title": "iPad Air",
+    "content": "Powerful. Colorful. Wonderful",
+    "price": "$599"
+  },
+  {
+    "id": 5,
+    "title": "iPad",
+    "content": "Delightfully capable. Surprisingly affordable",
+    "price": "$329"
+  },
+  {
+    "id": 6,
+    "title": "MacBook Air",
+    "content": "M1 chip",
+    "price": "$999"
+  },
+  {
+    "id": 7,
+    "title": "MacBook Air",
+    "content": "M2 chip",
+    "price": "$1199"
+  },
+  {
+    "id": 8,
+    "title": "MacBook Pro 13",
+    "content": "M2 chip",
+    "price": "$1299"
+  }
+]
