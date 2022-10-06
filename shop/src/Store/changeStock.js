@@ -1,23 +1,22 @@
 import { createSlice } from '@reduxjs/toolkit'
-import data from '../data.js'
 
+
+let temp = []
 let stock = createSlice({
     name : 'stock',
-    initialState : data,
+    initialState : temp,
     // 1. state 수정해주는 함수
     reducers : {
-        changeStockNo1(state){
-            state[0].stock += 1
+        addCount(state, action){
+            let idx = state.findIndex((a) => { return a.id === action.payload })
+            state[idx].stock++
         },
-        changeStockNo2(state){
-            state[1].stock += 1
-        },
-        changeStockNo3(state){
-            state[2].stock += 1
+        pushCart(state, action){
+            state.push(action.payload)
         }
     }
 })
 // 2. state 수정 함수 export
-export let { changeStockNo1, changeStockNo2, changeStockNo3 } =  stock.actions
+export let { addCount, pushCart } =  stock.actions
 
 export default stock

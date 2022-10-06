@@ -2,13 +2,14 @@ import datas from "../data.js";
 import { Outlet, useParams } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import Nav from "react-bootstrap/Nav";
+import { pushCart } from '../Store/changeStock.js'
+import {useDispatch} from 'react-redux'
 
 
 
 function Products(props) {
 
     let iPhone = [...props.iPhone]
-
     let {id} = useParams()
     let [count, setCount] = useState(0)
     let [alert, setAlert] = useState(true)
@@ -18,6 +19,7 @@ function Products(props) {
     let products = props.iPhone.find(function(x){
         return x.id == id
     })
+    let dispatch = useDispatch()
 
     useEffect(() => {
         if (isNaN(num) == true){
@@ -54,8 +56,13 @@ function Products(props) {
                         <p>{products.content}</p>
                         <p>{products.price}</p>
                         수량 : <input onChange={(e) => {setNum(e.target.value)}}/><br/><br/>
-                        <button className="btn btn-danger">상품 주문</button> 
-                        <button className="btn btn-danger" onClick={() => {}}>장바구니 추가</button>
+                        <button className="btn btn-danger">상품 주문</button>
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <button className="btn btn-danger" onClick={() => {
+                            console.log(products)
+                            dispatch(pushCart( {id : products.id, title : products.title, stock : products.stock, price : products.price} ))
+                            
+                            }}>장바구니 추가</button>
                     </div>
                 </div>
 

@@ -2,7 +2,7 @@ import './App.css';
 import { Navbar, Container, Nav, NavLink } from 'react-bootstrap';
 import { createContext, useState } from 'react';
 //image - import 작명 from './파일경로';
-import datas from './data.js';
+import data from './data.js';
 import {Products, About, Event} from './Routes/Pages.js';
 import { Routes, Route, Link, useNavigate, Outlet } from "react-router-dom";
 // useNavigate() : page 이동 도와주는 함수
@@ -10,10 +10,10 @@ import axios from 'axios';
 import { type } from '@testing-library/user-event/dist/type';
 import Cart from './Routes/Cart';
 
-
 function App() {
 
-  let [iPhone] = useState(datas);
+  let [iPhone, setIPhone] = useState(data);
+
   let navigate = useNavigate()
   return (
     <div className="App">
@@ -34,7 +34,7 @@ function App() {
         <Route path="/" element={
         <>
           <div className='main-bg'></div>
-            <Products_div iPhone = {iPhone}/>
+            <Products_div iPhone = {iPhone} setIPhone = {setIPhone}/>
         </>}/>
 
         <Route path="/products/:id" element={
@@ -84,41 +84,40 @@ function App() {
 
 function Products_div(props){
   let [cnt, setCnt] = useState(0);
-  
+
   return(
     <div className='container'>
         <div className='row'>
           {props.iPhone.map(function (a, i){
             return(
-              <div className='col-md-4'> 
+              <div className='col-md-4' key={i}> 
                 <Link to = {"/products/" + i}>
                   <img src= {process.env.PUBLIC_URL + "/image_src/apple" + (i+1) +".png"} width= "50%" height = "70%" />
                 </Link>
                 <h4>{props.iPhone[i].title}</h4>
                 <p>{props.iPhone[i].content}</p>
-                <p>{props.iPhone[i].price}</p>
+                <p>$ {props.iPhone[i].price}</p>
               </div>
             )
           })
           }
           <button className="btn btn-danger" onClick={() => {
-            
             if (cnt == 0){
             axios.get('https://raw.githubusercontent.com/Domlnick/Apple_MAll/main/shop/data2.json')
-            .then((data) => {
-              
-              let copy = [...props.iPhone, ...data.data]
+            .then((ajaxData) => {
+              let copy = [...props.iPhone, ...ajaxData.data]
               props.setIPhone(copy)
               setCnt(cnt + 1)
             })
             .catch(() => {
               alert('요청한 url이 존재하지 않거나 해당 url에 데이터가 없습니다.')
             })
-          }else if(cnt == 1){
+          }
+          else if(cnt == 1){
             axios.get('https://raw.githubusercontent.com/Domlnick/Apple_MAll/main/shop/data3.json')
-            .then((data) => {
+            .then((ajaxData) => {
               
-              let copy = [...props.iPhone, ...data.data]
+              let copy = [...props.iPhone, ...ajaxData.data]
               props.setIPhone(copy)
               setCnt(cnt + 1)
             })

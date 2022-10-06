@@ -1,6 +1,6 @@
 import Table from 'react-bootstrap/Table'
 import { useSelector, useDispatch } from 'react-redux'
-import { changeStockNo1, changeStockNo2, changeStockNo3 } from '../Store/changeStock.js';
+import { addCount } from '../Store/changeStock.js';
 
 function Cart() {
     
@@ -36,14 +36,7 @@ function Cart() {
                                 <td>{a.stock[i].stock * a.stock[i].price} 달러</td>
                                 <td>
                                     <button onClick={() => {
-                                        if(i == 0){
-                                            dispatch(changeStockNo1())
-                                        }else if(i == 1){
-                                            dispatch(changeStockNo2())
-                                        }else {
-                                            dispatch(changeStockNo3())
-                                        }
-                                        
+                                        dispatch(addCount(a.stock[i].id))
                                     }}>+</button>
                                 </td>
                             </tr>
