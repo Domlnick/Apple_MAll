@@ -1,6 +1,6 @@
 import './App.css';
 import { Navbar, Container, Nav, NavLink } from 'react-bootstrap';
-import { createContext, useState } from 'react';
+import { createContext, useEffect, useState } from 'react';
 //image - import 작명 from './파일경로';
 import data from './data.js';
 import {Products, About, Event} from './Routes/Pages.js';
@@ -12,6 +12,10 @@ import Cart from './Routes/Cart';
 
 function App() {
 
+  useEffect(() => {
+    localStorage.setItem('watched', JSON.stringify([]))
+  })
+
   let [iPhone, setIPhone] = useState(data);
 
   let navigate = useNavigate()
@@ -20,12 +24,11 @@ function App() {
       
       <Navbar bg="dark" variant="dark" className='navbar_header'>
         <Container>
-          <Navbar.Brand href="/">Apple Mall</Navbar.Brand>
+          <Navbar.Brand>Apple Mall</Navbar.Brand>
           <Nav className="me-auto">
-            <Nav.Link href="/">Home</Nav.Link>
-            {/* <Nav.Link href="/products">Products</Nav.Link> */}
-            <Nav.Link href="/cart" onClick={() => { navigate('/cart')}}>Cart</Nav.Link>
-            <Nav.Link href="/about">About Us</Nav.Link>
+            <Nav.Link onClick={() => { navigate('/')}}>Home</Nav.Link>
+            <Nav.Link onClick={() => { navigate('/cart')}}>Cart</Nav.Link>
+            <Nav.Link onClick={() => { navigate('/about')}}>About Us</Nav.Link>
           </Nav>
         </Container>
       </Navbar>

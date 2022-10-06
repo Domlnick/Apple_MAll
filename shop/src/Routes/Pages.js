@@ -1,6 +1,5 @@
-import datas from "../data.js";
 import { Outlet, useParams } from "react-router-dom";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Nav from "react-bootstrap/Nav";
 import { pushCart } from '../Store/changeStock.js'
 import {useDispatch} from 'react-redux'
@@ -11,7 +10,6 @@ function Products(props) {
 
     let iPhone = [...props.iPhone]
     let {id} = useParams()
-    let [count, setCount] = useState(0)
     let [alert, setAlert] = useState(true)
     let [num, setNum] = useState('')
     let [tab, setTab] = useState(0)
@@ -59,9 +57,7 @@ function Products(props) {
                         <button className="btn btn-danger">상품 주문</button>
                         &nbsp;&nbsp;&nbsp;&nbsp;
                         <button className="btn btn-danger" onClick={() => {
-                            console.log(products)
                             dispatch(pushCart( {id : products.id, title : products.title, stock : products.stock, price : products.price} ))
-                            
                             }}>장바구니 추가</button>
                     </div>
                 </div>
