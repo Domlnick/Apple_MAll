@@ -2,18 +2,21 @@
   {
     "id": 3,
     "title": "iPad Pro",
+    "stock" : 0,
     "content": "The ultimate iPad Experience",
     "price": "$799"
   },
   {
     "id": 4,
     "title": "iPad Air",
+    "stock" : 0,
     "content": "Powerful. Colorful. Wonderful",
     "price": "$599"
   },
   {
     "id": 5,
     "title": "iPad",
+    "stock" : 0,
     "content": "Delightfully capable. Surprisingly affordable",
     "price": "$329"
   }

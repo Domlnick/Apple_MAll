@@ -53,8 +53,9 @@ function Products(props) {
                         <h4 className="pt-5">{products.title}</h4>
                         <p>{products.content}</p>
                         <p>{products.price}</p>
-                        수량 : <input onChange={(e) => {setNum(e.target.value)}}/>
-                        <button className="btn btn-danger">상품 주문</button>
+                        수량 : <input onChange={(e) => {setNum(e.target.value)}}/><br/><br/>
+                        <button className="btn btn-danger">상품 주문</button> 
+                        <button className="btn btn-danger" onClick={() => {}}>장바구니 추가</button>
                     </div>
                 </div>
 
@@ -83,7 +84,7 @@ function TabContent({tab, id, iPhone}) {
 
     let content = [<div><br/>상품후기란 입니다.</div>, <div><br/>제품문의란 입니다.</div>, 
             <div>
-                <br/>{tab}{iPhone[id].detail}
+                <br/>{iPhone[id].detail}
             </div>]
 
     let [tf, setTf] = useState('');
@@ -97,7 +98,7 @@ function TabContent({tab, id, iPhone}) {
 
     return(
         <div className={`startTab ${tf}`}>
-            {content[tab]}{tab}
+            {content[tab]}
         </div>
         )
 }

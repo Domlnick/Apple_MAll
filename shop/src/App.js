@@ -14,7 +14,6 @@ import Cart from './Routes/Cart';
 function App() {
 
   let [iPhone] = useState(datas);
-
   let navigate = useNavigate()
   return (
     <div className="App">
@@ -85,7 +84,7 @@ function App() {
 
 function Products_div(props){
   let [cnt, setCnt] = useState(0);
-
+  
   return(
     <div className='container'>
         <div className='row'>
