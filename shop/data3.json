@@ -4,20 +4,23 @@
     "title": "MacBook Air",
     "stock" : 0,
     "content": "M1 chip",
-    "price": "$999"
+    "detail" : "N/A",
+    "price": 999
   },
   {
     "id": 7,
     "title": "MacBook Air",
     "stock" : 0,
     "content": "M2 chip",
-    "price": "$1199"
+    "detail" : "N/A",
+    "price": 1199
   },
   {
     "id": 8,
     "title": "MacBook Pro 13",
     "stock" : 0,
     "content": "M2 chip",
-    "price": "$1299"
+    "detail" : "N/A",
+    "price": 1299
   }
 ]
